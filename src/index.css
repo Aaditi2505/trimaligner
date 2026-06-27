@@ -662,3 +662,170 @@ body {
   transform: scale(1.25);
   box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.15);
 }
+
+/* Mobile responsive override to preserve side-by-side layout and adjust font scaling */
+@media (max-width: 768px) {
+  /* Prevent single-column wrap for grid-2 and enforce side-by-side */
+  .grid-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Shrink page container padding */
+  .container {
+    padding: 0 0.75rem !important;
+  }
+  
+  /* Shrink sections */
+  .section {
+    padding: 2.25rem 0 !important;
+  }
+
+  .hero {
+    padding: 1.5rem 0 2.5rem !important;
+  }
+
+  /* Shrink hero layout details */
+  .hero-content {
+    gap: 0.5rem !important;
+  }
+  
+  /* Adjust navbar elements to fit side-by-side perfectly on mobile */
+  .navbar {
+    top: 0.5rem !important;
+    height: 52px !important;
+    padding: 0 0.75rem !important;
+    width: 96% !important;
+    border-radius: 9999px !important;
+  }
+  .navbar.scrolled {
+    top: 0.5rem !important;
+    height: 52px !important;
+  }
+  .logo img {
+    height: 28px !important;
+  }
+  .nav-links {
+    gap: 0.65rem !important;
+  }
+  .nav-link {
+    font-size: 0.72rem !important;
+    padding: 0.25rem 0 !important;
+  }
+  .nav-link::after {
+    height: 1.5px !important;
+  }
+  
+  /* Font size overrides for side-by-side readability on mobile */
+  .heading-1 {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .heading-2 {
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .heading-3 {
+    font-size: 0.9rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .text-lg {
+    font-size: 0.72rem !important;
+    line-height: 1.4 !important;
+  }
+  p {
+    font-size: 0.7rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .badge {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.58rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  
+  .btn {
+    padding: 0.45rem 0.85rem !important;
+    font-size: 0.68rem !important;
+    gap: 0.25rem !important;
+  }
+  .btn svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  /* Mockup windows heights override */
+  .mockup-window {
+    min-height: 220px !important;
+  }
+  .mockup-window img {
+    max-height: 170px !important;
+  }
+  
+  /* Software view image button containers */
+  .image-btn-container {
+    gap: 1rem !important;
+  }
+  .image-btn-container button {
+    height: 120px !important;
+    width: 150px !important;
+  }
+  .image-btn-container button img {
+    height: 90px !important;
+  }
+  .image-btn-container span {
+    font-size: 0.85rem !important;
+  }
+
+  /* Software section layout logo sizes */
+  .section img[alt*="Logo"] {
+    height: 40px !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Interactive flow detail card */
+  .image-frame {
+    min-height: 160px !important;
+    padding: 0.5rem !important;
+  }
+  .image-frame img {
+    max-height: 120px !important;
+  }
+  .image-frame div[style*="marginTop: '1.5rem'"] {
+    margin-top: 0.5rem !important;
+    padding: 0.5rem !important;
+  }
+  .image-frame div[style*="marginTop: '1.5rem'"] p {
+    font-size: 0.65rem !important;
+  }
+  
+  /* ROI Calculator */
+  .range-slider::-webkit-slider-thumb {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .range-slider::-moz-range-thumb {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .glass-card {
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+  }
+  
+  /* Form inputs sizes */
+  .form-group {
+    margin-bottom: 0.75rem !important;
+  }
+  .form-input, .form-textarea {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+  .form-textarea {
+    min-height: 70px !important;
+  }
+}

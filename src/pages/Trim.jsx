@@ -178,7 +178,7 @@ const Trim = () => {
           <div className="grid-2 reveal intro-grid">
             <div>
               {/* macOS style Window mockup container (Light/White Theme) */}
-              <div style={{
+              <div className="mockup-window" style={{
                 position: 'relative',
                 height: '100%',
                 minHeight: '560px', // Increased height

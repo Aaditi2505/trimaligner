@@ -31,6 +31,7 @@ const SoftwareImageSlider = ({ images, prefix = "Interface" }) => {
 
   return (
     <div
+      className="mockup-window"
       style={{
         position: 'relative',
         height: '100%',
