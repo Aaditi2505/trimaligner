@@ -14,7 +14,6 @@ const Contact = () => {
   });
 
   const [faqActive, setFaqActive] = useState(null);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Scroll reveal IntersectionObserver
   useEffect(() => {
@@ -49,7 +48,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    const subject = encodeURIComponent(`New Inquiry from ${formData.name} - TrimAligners`);
+    const subject = encodeURIComponent(`New Inquiry from ${formData.name} - TrimAligner`);
     const body = encodeURIComponent(`
 Name: ${formData.name}
 Email: ${formData.email}
@@ -64,7 +63,6 @@ ${formData.message}
     
     const officialEmail = "info@trimaligner.com"; 
     window.location.href = `mailto:${officialEmail}?subject=${subject}&body=${body}`;
-    setShowSuccessModal(true);
   };
 
   const toggleFaq = (index) => {
@@ -283,7 +281,7 @@ ${formData.message}
                         style={{ flex: 2, padding: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.65rem' }}
                       >
                         <Send size={18} />
-                        Submit Request
+                        Send to Gmail
                       </button>
                     </div>
                   </div>
@@ -327,80 +325,6 @@ ${formData.message}
         </div>
       </section>
 
-      {/* Success Modal Overlay */}
-      {showSuccessModal && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(9, 13, 22, 0.6)',
-          backdropFilter: 'blur(10px)',
-          zIndex: 2000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1.5rem'
-        }}>
-          <div className="glass-card animate-fade-in" style={{
-            background: '#ffffff',
-            maxWidth: '480px',
-            width: '100%',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.5rem',
-            position: 'relative',
-            border: '1px solid var(--border-color)',
-            boxShadow: 'var(--shadow-lg)'
-          }}>
-            <button 
-              onClick={() => setShowSuccessModal(false)}
-              style={{
-                position: 'absolute',
-                top: '1.25rem',
-                right: '1.25rem',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-muted)',
-                padding: '0.25rem'
-              }}
-            >
-              <X size={20} />
-            </button>
-
-            <div style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '50%',
-              background: 'var(--primary-light)',
-              color: 'var(--primary)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '0.5rem'
-            }}>
-              <CheckCircle2 size={36} />
-            </div>
-
-            <h3 className="heading-3" style={{ margin: 0 }}>Request Submitted!</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0, fontWeight: '300' }}>
-              Your professional clinical integration profile has been received. Our lead systems engineer will follow up with your customized ROI proposal within 24 hours.
-            </p>
-
-            <button 
-              onClick={() => setShowSuccessModal(false)}
-              className="btn btn-primary"
-              style={{ width: '100%', padding: '1rem' }}
-            >
-              Acknowledge & Close
-            </button>
-          </div>
-        </div>
-      )}
       
     </div>
   );

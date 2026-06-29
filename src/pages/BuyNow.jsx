@@ -12,6 +12,7 @@ const BuyNow = () => {
     notes: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Scroll reveal IntersectionObserver
   useEffect(() => {
@@ -30,30 +31,40 @@ const BuyNow = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleOrderSubmit = (e) => {
+  const handleOrderSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
     
-    const subject = encodeURIComponent(`New TRIM Quote Request from ${orderForm.name}`);
-    const body = encodeURIComponent(`
-Name: ${orderForm.name}
-Clinic/Lab: ${orderForm.clinicName}
-Email: ${orderForm.email}
-Phone: ${orderForm.phone}
-
-Special Logistics Notes:
-${orderForm.notes || 'None'}
-    `);
-    
-    const officialEmail = "info@trimaligner.com";
-    window.location.href = `mailto:${officialEmail}?subject=${subject}&body=${body}`;
-    
-    setTimeout(() => {
-      setShowOrderModal(false);
-      setIsSubmitted(false);
-      setOrderForm({ name: '', email: '', phone: '', clinicName: '', notes: '' });
-      alert("Order request received! An email draft has been generated to complete your submission.");
-    }, 1000);
+    try {
+      const response = await fetch('/send_email.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...orderForm,
+          formType: 'Purchase Proposal Request'
+        })
+      });
+      
+      const result = await response.json();
+      if (response.ok && result.status === 'success') {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setShowOrderModal(false);
+          setIsSubmitted(false);
+          setOrderForm({ name: '', email: '', phone: '', clinicName: '', notes: '' });
+          alert("Quote request submitted successfully!");
+        }, 1500);
+      } else {
+        alert(result.message || "Failed to submit quote request. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to submit quote request. Please check your internet connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -373,10 +384,10 @@ Because every lab and clinic uses different aligner design software, production 
               <button 
                 type="submit" 
                 className="btn btn-primary" 
-                disabled={isSubmitted}
+                disabled={isSubmitting || isSubmitted}
                 style={{ width: '100%', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
               >
-                {isSubmitted ? "Generating Proposal..." : "Submit Quote Request"}
+                {isSubmitting ? "Submitting..." : (isSubmitted ? "Proposal Generated!" : "Submit Quote Request")}
               </button>
             </form>
           </div>
