@@ -62,7 +62,15 @@ ${formData.message}
     `);
     
     const officialEmail = "info@trimaligner.com"; 
-    window.location.href = `mailto:${officialEmail}?subject=${subject}&body=${body}`;
+    
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      window.location.href = `mailto:${officialEmail}?subject=${subject}&body=${body}`;
+    } else {
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${officialEmail}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, '_blank');
+    }
   };
 
   const toggleFaq = (index) => {
